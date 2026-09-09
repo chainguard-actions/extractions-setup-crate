@@ -1,0 +1,27 @@
+name: Test installing latest version of a crate
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Install fd at latest version using owner/name inputs
+        id: action
+        uses: .
+        with:
+          owner: sharkdp
+          name: fd
+          github-token: ${{ github.token }}
+
+      - name: Assert fd is installed and executable
+        run: |
+          echo "Checking if fd is on PATH..."
+          if ! command -v fd > /dev/null 2>&1; then
+            echo "FAIL: fd not found on PATH"
+            exit 1
+          fi
+          echo "fd found at: $(command -v fd)"
+          fd --version
+          echo "PASS: fd is installed and executable"

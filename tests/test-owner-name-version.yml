@@ -1,0 +1,39 @@
+name: Test usage with owner, name, and version inputs
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Install fd using owner/name/version inputs
+        id: action
+        uses: .
+        with:
+          owner: sharkdp
+          name: fd
+          version: "10.2.0"
+          github-token: ${{ github.token }}
+
+      - name: Assert fd is installed and executable
+        run: |
+          echo "Checking if fd is on PATH..."
+          if ! command -v fd > /dev/null 2>&1; then
+            echo "FAIL: fd not found on PATH"
+            exit 1
+          fi
+          echo "fd found at: $(command -v fd)"
+          fd --version
+          echo "PASS: fd is installed and executable"
+
+      - name: Assert correct version is installed
+        run: |
+          VERSION_OUTPUT=$(fd --version)
+          echo "Version output: $VERSION_OUTPUT"
+          if echo "$VERSION_OUTPUT" | grep -q "10.2.0"; then
+            echo "PASS: correct version 10.2.0 is installed"
+          else
+            echo "FAIL: expected version 10.2.0 but got: $VERSION_OUTPUT"
+            exit 1
+          fi

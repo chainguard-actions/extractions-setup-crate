@@ -1,0 +1,26 @@
+name: Test basic usage - install crate via repo input
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Install bat using repo input with pinned version
+        id: action
+        uses: .
+        with:
+          repo: sharkdp/bat@v0.24.0
+          github-token: ${{ github.token }}
+
+      - name: Assert bat is installed and executable
+        run: |
+          echo "Checking if bat is on PATH..."
+          if ! command -v bat > /dev/null 2>&1; then
+            echo "FAIL: bat not found on PATH"
+            exit 1
+          fi
+          echo "bat found at: $(command -v bat)"
+          bat --version
+          echo "PASS: bat is installed and executable"
