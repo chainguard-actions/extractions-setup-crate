@@ -1,0 +1,28 @@
+name: Test basic usage - install crate via repo input
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - id: action
+        uses: .
+        with:
+          repo: casey/just@1.36
+
+      - name: Assert just is installed and on PATH
+        run: |
+          echo "Checking if 'just' is available on PATH..."
+          if ! command -v just >/dev/null 2>&1; then
+            echo "FAIL: 'just' not found on PATH"
+            exit 1
+          fi
+          VERSION=$(just --version)
+          echo "just version: $VERSION"
+          if [ -z "$VERSION" ]; then
+            echo "FAIL: 'just --version' returned empty output"
+            exit 1
+          fi
+          echo "PASS: just is installed and accessible"

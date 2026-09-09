@@ -1,0 +1,29 @@
+name: Test repo@version syntax
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - id: action
+        uses: .
+        with:
+          repo: casey/just@1.36.0
+
+      - name: Assert just 1.36.0 is installed
+        run: |
+          echo "Checking if 'just' is available on PATH..."
+          if ! command -v just >/dev/null 2>&1; then
+            echo "FAIL: 'just' not found on PATH"
+            exit 1
+          fi
+          VERSION=$(just --version)
+          echo "just version: $VERSION"
+          if echo "$VERSION" | grep -q "1.36.0"; then
+            echo "PASS: just 1.36.0 is installed"
+          else
+            echo "FAIL: expected version 1.36.0 but got: $VERSION"
+            exit 1
+          fi

@@ -1,0 +1,31 @@
+name: Test deprecated owner+name+version inputs
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - id: action
+        uses: .
+        with:
+          owner: casey
+          name: just
+          version: '1.36.0'
+
+      - name: Assert just is installed via deprecated inputs
+        run: |
+          echo "Checking if 'just' is available on PATH..."
+          if ! command -v just >/dev/null 2>&1; then
+            echo "FAIL: 'just' not found on PATH"
+            exit 1
+          fi
+          VERSION=$(just --version)
+          echo "just version: $VERSION"
+          if echo "$VERSION" | grep -q "1.36.0"; then
+            echo "PASS: just 1.36.0 installed via deprecated owner+name+version inputs"
+          else
+            echo "FAIL: expected version 1.36.0 but got: $VERSION"
+            exit 1
+          fi

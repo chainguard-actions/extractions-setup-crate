@@ -1,0 +1,25 @@
+name: Test error - missing required inputs
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - id: action
+        uses: .
+        continue-on-error: true
+        # No repo, owner, or name provided - should fail
+
+      - name: Assert action failed with missing inputs
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          if [ "$OUTCOME" = "failure" ]; then
+            echo "PASS: action correctly failed when no repo or owner/name were provided"
+          else
+            echo "FAIL: expected action to fail with missing inputs, but got outcome: $OUTCOME"
+            exit 1
+          fi
