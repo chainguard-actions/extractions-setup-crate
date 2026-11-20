@@ -8,10 +8,10 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 
 | Version | Tag | Upstream commit | Hardening report |
 |---------|-----|-----------------|------------------|
-| v1.4.0 | [`v1.4.0`](https://github.com/chainguard-actions/extractions-setup-crate/tree/v1.4.0) | [`4993624`](https://github.com/extractions/setup-crate/commit/4993624604c307fbca528d28a3c8b60fa5ecc859) | [`HARDENING.md`](https://github.com/chainguard-actions/extractions-setup-crate/blob/v1.4.0/HARDENING.md) |
+| v1.4.0 | [`v1.4.0`](https://github.com/chainguard-actions/extractions-setup-crate/tree/v1.4.0) | [`4993624`](https://github.com/extractions/setup-crate/commit/4993624604c307fbca528d28a3c8b60fa5ecc859) | — |
 | v2 | [`v2`](https://github.com/chainguard-actions/extractions-setup-crate/tree/v2) | [`7577c1b`](https://github.com/extractions/setup-crate/commit/7577c1bdf2d95e6d65d532788f35ed79d4b1dda2) | [`HARDENING.md`](https://github.com/chainguard-actions/extractions-setup-crate/blob/v2/HARDENING.md) |
-| v2.0.0 | [`v2.0.0`](https://github.com/chainguard-actions/extractions-setup-crate/tree/v2.0.0) | [`0551596`](https://github.com/extractions/setup-crate/commit/0551596312d4008a6dfbc4d3c38fa20eaef46d2d) | [`HARDENING.md`](https://github.com/chainguard-actions/extractions-setup-crate/blob/v2.0.0/HARDENING.md) |
-| v2.0.1 | [`v2.0.1`](https://github.com/chainguard-actions/extractions-setup-crate/tree/v2.0.1) | [`7577c1b`](https://github.com/extractions/setup-crate/commit/7577c1bdf2d95e6d65d532788f35ed79d4b1dda2) | [`HARDENING.md`](https://github.com/chainguard-actions/extractions-setup-crate/blob/v2.0.1/HARDENING.md) |
+| v2.0.0 | [`v2.0.0`](https://github.com/chainguard-actions/extractions-setup-crate/tree/v2.0.0) | [`0551596`](https://github.com/extractions/setup-crate/commit/0551596312d4008a6dfbc4d3c38fa20eaef46d2d) | — |
+| v2.0.1 | [`v2.0.1`](https://github.com/chainguard-actions/extractions-setup-crate/tree/v2.0.1) | [`7577c1b`](https://github.com/extractions/setup-crate/commit/7577c1bdf2d95e6d65d532788f35ed79d4b1dda2) | — |
 
 ## Privacy
 
